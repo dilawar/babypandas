@@ -20,7 +20,7 @@ setup(
     description = "A small pure python library with Pandas like API",
     long_description = readme,
     packages = ['babypandas', 'babypandas.tests'],
-    package_dir = { 'babypandas' : '.' },
+    package_dir = { 'babypandas' : 'src', 'babypandas.tests' : 'tests' },
     install_requires = [ ],
     author = "aegorenkov",
     maintainer = "Dilawar Singh",
