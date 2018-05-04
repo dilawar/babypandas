@@ -72,6 +72,7 @@ def read_csv(filepath_or_buffer, header='infer', names=None, index_col=None, sep
                     encoding=encoding, squeeze=squeeze, mangle_dupe_cols=True, tupleize_cols=False,
                     infer_datetime_format=False, skip_blank_lines=True))
 
+
 def to_datetime():
     pass
 
@@ -114,7 +115,8 @@ class Index(object):
 class Series(object):
     # TODO consider adding astype
     def __init__(self, data=None, index=None, dtype=None, name=None, copy=False, fastpath=False):
-        self._series = pd.Series(data=data, index=index, dtype=dtype, name=name, copy=copy, fastpath=fastpath)
+        self._series = pd.Series(
+            data=data, index=index, dtype=dtype, name=name, copy=copy, fastpath=fastpath)
 
     def __repr__(self):
         return self._series.__repr__()
@@ -173,7 +175,8 @@ class DataFrame(object):
     # TODO consider adding is null
     # TODO look at sortlevel for multi-index
     def __init__(self, data=None, index=None, columns=None, dtype=None, copy=False):
-        self._df = pd.DataFrame(data=data, index=index, columns=columns, dtype=dtype, copy=copy)
+        self._df = pd.DataFrame(data=data, index=index,
+                                columns=columns, dtype=dtype, copy=copy)
 
     def __getitem__(self, key):
         return from_panda(self._df.__getitem__(to_panda(key)))
@@ -207,23 +210,23 @@ class DataFrame(object):
 
     def sort_values(self, by, axis=0, ascending=True, na_position='last'):
         return from_panda(
-                self._df.sort_values(by, axis=axis, ascending=ascending,
-                                     inplace=False, kind='quicksort', na_position=na_position))
+            self._df.sort_values(by, axis=axis, ascending=ascending,
+                                 inplace=False, kind='quicksort', na_position=na_position))
 
     def reindex(self, index=None, columns=None, **kwargs):
         return from_panda(self._df.reindex(index=index, columns=columns, **kwargs))
 
     def apply(self, func, axis=0, broadcast=False, raw=False, reduce=None, args=(), **kwds):
         return from_panda(
-                self._df.apply(func, axis=axis, broadcast=broadcast,
-                               raw=raw, reduce=reduce, args=args, **kwds))
+            self._df.apply(func, axis=axis, broadcast=broadcast,
+                           raw=raw, reduce=reduce, args=args, **kwds))
 
     def applymap(self):
         pass
 
     def append(self, other, ignore_index=False, verify_integrity=False):
         return from_panda(
-                self._df.append(to_panda(other), ignore_index=ignore_index, verify_integrity=verify_integrity))
+            self._df.append(to_panda(other), ignore_index=ignore_index, verify_integrity=verify_integrity))
 
     @property
     def values(self):
@@ -269,7 +272,8 @@ class DataFrame(object):
         return from_panda(self._df.describe(percentiles=percentiles, include=include, exclude=exclude))
 
     def info(self, verbose=None, buf=None, max_cols=None, memory_usage=None, null_counts=None):
-        self._df.info(verbose=verbose, buf=buf, max_cols=max_cols, memory_usage=memory_usage, null_counts=null_counts)
+        self._df.info(verbose=verbose, buf=buf, max_cols=max_cols,
+                      memory_usage=memory_usage, null_counts=null_counts)
 
     def replace(self, to_replace=None, value=None, limit=None, regex=False, method='pad', axis=None):
         return from_panda(
@@ -281,4 +285,4 @@ class DataFrame(object):
 
 
 if __name__ == '__main__':
-    print baby_panda()
+    print(baby_panda())
