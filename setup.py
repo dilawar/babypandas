@@ -17,14 +17,14 @@ classifiers = [
 setup(
     name = "babypandas",
     version = "0.0.1",
-    description = "A small pure python library with Pandas like API"
+    description = "A small pure python library with Pandas like API",
     long_description = readme,
     package_data = {},
     install_requires = [ ],
     author = "aegorenkov",
     maintainer = "Dilawar Singh",
-    maintainer_email = "dilawars@ncbs.res.in"
+    maintainer_email = "dilawars@ncbs.res.in",
     url = "http://github.com/dilawar/",
-    license='GPL',
+    license='GPL?',
     classifiers=classifiers,
 )
